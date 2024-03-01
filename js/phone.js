@@ -15,6 +15,15 @@ const displayPhones = phones => {
     //clear phone container card before adding new cards
      phoneContainer.innerHTML ='';
 
+    //  display show all button if there are more than 12 phones
+    const showAllContainer = document.getElementById('show-all-container')
+    if(phones.length > 12){
+        showAllContainer.classList.remove('hidden')
+    }
+    else{
+        showAllContainer.classList.add('hidden')
+    }
+
     //  proti ta phn ke niyar jnno forEach but alada kore kuthaw use hobe na
      phones.forEach(phone =>{
          console.log(phone)
@@ -36,15 +45,28 @@ const displayPhones = phones => {
         // step 4 append child
         phoneContainer.appendChild(phoneCard);
      })
+    //  hide loading spinner
+    toggleLoadingSpinner(false)
 }
 
 // handle search button
 const handleSearch = ()=>{
-
+    toggleLoadingSpinner(true);
     const searchField = document.getElementById('search-fields');
     const searchText = searchField.value;
     console.log(searchText);
     loadPhone(searchText)
+}
+
+const toggleLoadingSpinner = (isLoading) =>{
+    const loadingSpinner = document.getElementById('loading-spinner');
+    if(isLoading){
+        loadingSpinner.classList.remove('hidden')
+    }
+    else{
+        loadingSpinner.classList.add('hidden')
+    }
+    
 }
 
 // loadPhone();
